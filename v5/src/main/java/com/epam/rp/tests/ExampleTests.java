@@ -1,4 +1,4 @@
-package com.epam.reportportal.tests;
+package com.epam.rp.tests;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
@@ -39,14 +39,14 @@ public class ExampleTests {
 
 	@BeforeEach
 	void initializeBaseClass() {
-		System.out.println("Before each");
+		log.info("Before each");
 	}
 
 	@Test
 	@Tag("tag1")
 	@Tag("tag2")
 	void baseClassTest() {
-		System.out.println("test");
+		log.info("test");
 	}
 
 	@Nested
@@ -54,18 +54,18 @@ public class ExampleTests {
 
 		@BeforeEach
 		void initializeFirstNesting() {
-			System.out.println("nested - before each");
+			log.info("nested - before each");
 		}
 
 		@Test
 		@RepeatedTest(10)
 		void firstNestedTest() {
-			System.out.println("nested - test");
+			log.info("nested - test");
 		}
 
 		@AfterEach
 		void afterFirstContext() {
-			System.out.println("nested - after each");
+			log.info("nested - after each");
 		}
 
 	}

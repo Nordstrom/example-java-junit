@@ -22,10 +22,35 @@
         <dependency>
             <groupId>com.epam.reportportal</groupId>
             <artifactId>agent-java-junit</artifactId>
-            <version>2.7.1</version>
+            <version>2.7.2-SNAPSHOT</version>
         </dependency>
+
 
     </dependencies>
 
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.21.0</version>
+                <configuration>
+                    <testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
+                    <testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>com.epam.reportportal.junit.ReportPortalListener</value>
+                        </property>
+                    </properties>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

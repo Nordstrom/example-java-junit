@@ -17,12 +17,20 @@ repositories {
     maven { url "http://dl.bintray.com/epam/reportportal" }
 }
 
-configurations {
-    junitAgent
+dependencies {
+	compileOnly 'org.projectlombok:lombok:1.18.0'
+	compile 'com.epam.reportportal:logger-java-log4j:4.0.1'
+	compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.10.0'
+	compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'com.epam.reportportal:agent-java-junit:4.1.0'
+}
+
+ext {
+    junitFoundation = configurations.compile.resolvedConfiguration.resolvedArtifacts.find { it.name == 'junit-foundation' }
 }
 
 test.doFirst {
-    jvmArgs "-javaagent:${configurations.junitAgent.files.iterator().next()}"
+    jvmArgs "-javaagent:${junitFoundation.file}"
 }
 
 test {
@@ -30,11 +38,3 @@ test {
     testLogging.showStandardStreams = true
 }
 
-dependencies {
-	compileOnly 'org.projectlombok:lombok:1.18.0'
-	compile 'com.epam.reportportal:logger-java-log4j:4.0.1'
-	compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.10.0'
-	compile 'org.slf4j:slf4j-api:1.7.25'
-    compile 'com.epam.reportportal:agent-java-junit:4.1.0'
-    junitAgent 'com.nordstrom.tools:junit-foundation:9.0.3'
-}

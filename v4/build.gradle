@@ -7,7 +7,7 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-description = 'ReportPortal JUnit example'
+description = 'ReportPortal JUnit 4 example'
 
 repositories {
     mavenLocal()
